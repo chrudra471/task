@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Gallery</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f0f0;
+      transition: background-color 0.5s;
+    }
+
+    header, footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 1em;
+    }
+
+    nav {
+      background-color: #555;
+      padding: 0.5em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav button {
+      cursor: pointer;
+      padding: 0.5em 1em;
+      font-size: 16px;
+      color: white;
+      background-color: #4CAF50;
+      border: none;
+      border-radius: 5px;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1em;
+      padding: 1em;
+    }
+
+    .gallery img {
+      width: 100%;
+      border-radius: 5px;
+    }
+
+    #clock {
+      font-size: 20px;
+      text-align: center;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Image Gallery</h1>
+  </header>
+
+  <nav>
+    <button id="themeButton">Change Theme</button>
+  </nav>
+
+  <div class="gallery">
+    <img src="/Users/rudrapratapchauhan/Downloads/WhatsApp Image 2023-12-26 at 19.58.14.jpeg" alt="Image 1">
+    <img src="/Users/rudrapratapchauhan/Downloads/WhatsApp Image 2023-12-26 at 19.58.15.jpeg" alt="Image 2">
+    <img src="/Users/rudrapratapchauhan/Downloads/WhatsApp Image 2023-12-26 at 20.45.49.jpeg" alt="Image 3">
+    <img src="/Users/rudrapratapchauhan/Downloads/WhatsApp Image 2023-12-26 at 19.58.16.jpeg" alt="Image 4">
+    <img src="/Users/rudrapratapchauhan/Downloads/WhatsApp Image 2023-12-26 at 20.06.55 (1).jpeg" alt="Image 5">
+    <img src="/Users/rudrapratapchauhan/Downloads/WhatsApp Image 2023-12-26 at 20.06.55.jpeg" alt="Image 6">
+  </div>
+
+  <div id="clock"></div>
+
+  <footer>
+    <p>&copy; 2023 Image Gallery</p>
+  </footer>
+
+  <script>
+    const themeButton = document.getElementById('themeButton');
+    const body = document.body;
+
+    themeButton.addEventListener('click', () => {
+      body.style.backgroundColor = getRandomColor();
+      alert('Changed theme successfully');
+    });
+
+    function getRandomColor() {
+      const letters = '0123456789ABCDEF';
+      let color = '#';
+      for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    }
+
+    const clockElement = document.getElementById('clock');
+
+    function updateClock() {
+      const now = new Date();
+      const hours = now.getHours();
+      const minutes = now.getMinutes();
+      const seconds = now.getSeconds();
+      const timeFormat = hours >= 12 ? 'PM' : 'AM';
+      const formattedHours = hours % 12 || 12;
+
+      const timeString = `${formattedHours}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')} ${timeFormat}`;
+      clockElement.textContent = timeString;
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
+  </script>
+</body>
+</html>
